@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Git') {
               steps {
-                git $GIT_PROJECT_ADDR
+                git ${GIT_PROJECT_ADDR}
               }
             }
         stage('Build') {
