@@ -1,16 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
 	"github.com/gin-gonic/gin"
 )
+
 
 type Response struct {
 	Code int `json:"code"`
 	Message string `json:"msg"`
-	Data interface{}
+	Data interface{} `json:"data"`
 }
 
 func main() {
@@ -31,10 +29,5 @@ func main() {
 			Data:    "hello golang",
 		})
 	})
-
-	server := http.Server{
-		Addr:    fmt.Sprintf(":%d", 6666),
-		Handler: r,
-	}
-	log.Fatalln(server.ListenAndServe())
+	r.Run(":8088")
 }
