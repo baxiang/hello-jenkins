@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_PROJECT_ADDR="https://github.com/baxiang/hello-jenkins"
+        //GIT_PROJECT_ADDR="https://github.com/baxiang/hello-jenkins"
         IMAGE_NAME="hello-jenkins"
         IMAGE_REGISTRY="baxiang/${IMAGE_NAME}"
         VERSION_ID="${BUILD_ID}"
@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Git') {
               steps {
-                git ${GIT_PROJECT_ADDR}
+                git "https://github.com/baxiang/hello-jenkins"
               }
             }
         stage('Build') {
