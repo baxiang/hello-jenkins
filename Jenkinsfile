@@ -23,13 +23,15 @@ pipeline {
                 sh "docker run --rm ${IMAGE_REGISTRY}:${VERSION_ID}"
               }
         }
-        stage('Push') {
-            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                                            // Push image and tag it with our build number for versioning purposes.
-                                            app.push("${env.BUILD_NUMBER}")
-                                            // Push the same image and tag it as the latest version (appears at the top of our version list).
-                                            app.push("latest")
-                                        }
+        stage('Push image') {
+                /* Finally, we'll push the image with two tags:
+                 * First, the incremental build number from Jenkins
+                 * Second, the 'latest' tag.
+                 * Pushing multiple tags is cheap, as all the layers are reused. */
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
+                }
         }
         stage('Remove Unused docker image') {
               steps{
