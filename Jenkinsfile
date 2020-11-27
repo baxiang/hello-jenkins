@@ -16,8 +16,7 @@ pipeline {
             }
         stage('Build') {
             steps {
-                dockerImage = docker.build IMAGE_REGISTRY +":${VERSION_ID}"
-
+                docker.build("$IMAGE_REGISTRY",  '.')
             }
         }
         stage('Push image') {
@@ -25,7 +24,8 @@ pipeline {
             steps{
                script {
                   docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                         dockerImage.push()
+                          docker.image("$IMAGE_REGISTRY").push 'latest'
+                          docker.image("$IMAGE_REGISTRY").push()
                      }
 
                      }
