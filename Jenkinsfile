@@ -16,7 +16,7 @@ pipeline {
             }
         stage('Build') {
             steps {
-                dockerImage = docker.build ${IMAGE_REGISTRY}:${VERSION_ID}
+                dockerImage = docker.build "${IMAGE_REGISTRY}:${VERSION_ID}"
 
             }
         }
