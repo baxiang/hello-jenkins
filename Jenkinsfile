@@ -6,6 +6,7 @@ pipeline {
         IMAGE_NAME="hello-jenkins"
         IMAGE_REGISTRY="baxiang/${IMAGE_NAME}"
         VERSION_ID="${BUILD_ID}"
+        dockerImage = ""
         }
     stages {
         stage('Git') {
@@ -15,7 +16,8 @@ pipeline {
             }
         stage('Build') {
             steps {
-                sh "docker build -t ${IMAGE_REGISTRY}:${VERSION_ID} ."
+                dockerImage = docker.build ${IMAGE_REGISTRY}:${VERSION_ID}
+
             }
         }
         stage('Push image') {
