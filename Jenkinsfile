@@ -26,8 +26,8 @@ pipeline {
                script {
                   docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
 
-                          docker.image("$IMAGE_REGISTRY").push 'latest'
-                          docker.image("$IMAGE_REGISTRY").push("$IMAGE_REGISTRY:$VERSION_ID")
+                          docker.image("$IMAGE_REGISTRY:$VERSION_ID").push 'latest'
+                          docker.image("$IMAGE_REGISTRY:$VERSION_ID").push()
                      }
 
                      }
