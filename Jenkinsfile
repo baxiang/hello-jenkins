@@ -18,11 +18,7 @@ pipeline {
                 sh "docker build -t ${IMAGE_REGISTRY}:${VERSION_ID} ."
             }
         }
-        stage('Testing Image'){
-              steps{
-                sh "docker run --rm ${IMAGE_REGISTRY}:${VERSION_ID}"
-              }
-        }
+
         stage('Push image') {
 
             steps{
